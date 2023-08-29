@@ -1,4 +1,5 @@
-import { Navbar } from '@components/Navbar';
+import { Avocado } from '@components/Cards';
+import { AvocadoContainer } from '@components/views/Home/styled-components';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 interface State {
@@ -19,14 +20,16 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
-            <Navbar />
-            <div>
-                {state.avos.map((avo) => (
-                    <div key={avo.id}>{avo.name}</div>
-                ))}
-            </div>
-        </div>
+        <AvocadoContainer>
+            {state.avos.map((avo) => (
+                <Avocado
+                    image={{ alt: avo.name, src: avo.image }}
+                    key={avo.id}
+                    name={avo.name}
+                    price={avo.price}
+                />
+            ))}
+        </AvocadoContainer>
     );
 };
 

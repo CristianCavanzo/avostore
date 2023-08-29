@@ -1,8 +1,25 @@
 import Link from 'next/link';
+import styled from 'styled-components';
 
+const NavbarComponent = styled.nav`
+    width: 100%;
+    ul {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 90%;
+        padding: 8px 12px;
+        li {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+        }
+    }
+`;
 const Navbar = () => {
     return (
-        <nav>
+        <NavbarComponent>
             <ul>
                 <li>
                     <Link href="/">Home</Link>
@@ -11,7 +28,7 @@ const Navbar = () => {
                     <Link href="/about">About</Link>
                 </li>
             </ul>
-        </nav>
+        </NavbarComponent>
     );
 };
 
