@@ -2,6 +2,7 @@ import { Avocado } from '@components/Cards';
 import { AvocadoContainer } from '@components/views/Home/styled-components';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+
 interface State {
     avos: TProduct[];
 }

@@ -15,6 +15,7 @@ export const AvocadoComponent = styled.div`
         transition: 100ms ease-out;
         transform: translateY(-5px);
         box-shadow: 0 0 6px #000000a1;
+        z-index: 1;
     }
     .avocado__bottom {
         display: flex;
