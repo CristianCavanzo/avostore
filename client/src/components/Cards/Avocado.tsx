@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import { AvocadoComponent } from './styled-component/AvocadoComponent';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@redux/store';
+import { addToCard } from '@redux/slices/cartSlice';
 
 interface Props {
     image: {
@@ -8,9 +11,14 @@ interface Props {
     };
     name: string;
     price: number;
+    id: string;
 }
 
-const Avocado = ({ image, name, price }: Props) => {
+const Avocado = ({ image, name, price, id }: Props) => {
+    const dispatch = useDispatch<AppDispatch>();
+    const handleAddCard = () => {
+        dispatch(addToCard(id));
+    };
     return (
         <AvocadoComponent>
             <Image
@@ -30,7 +38,23 @@ const Avocado = ({ image, name, price }: Props) => {
                     <p className="avocado__text-name">{name}</p>
                     <p className="avocado__text-price">{price}</p>
                 </div>
-                <button className="avocado__bottom-add">+</button>
+                <button className="avocado__bottom-add" onClick={handleAddCard}>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        width={20}
+                        height={20}
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 4.5v15m7.5-7.5h-15"
+                        />
+                    </svg>
+                </button>
             </div>
         </AvocadoComponent>
     );

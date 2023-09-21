@@ -1,29 +1,30 @@
 import { CartReducer } from '@models/cart';
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState: CartReducer = {
-    cart: [],
-};
+const initialState: CartReducer = [];
 
 const store = createSlice({
     name: 'cart',
     initialState,
     reducers: {
         addToCard: (state, action) => {
-            const existProduct = state.cart.findIndex(
-                (product) => product.id === action.payload
+            const id = action.payload;
+            const indexProduct = state.findIndex(
+                (product) => product.id === id
             );
-            if (existProduct && existProduct !== -1) {
-                state[existProduct] = {
-                    ...state[existProduct],
-                    quantity: ++state[existProduct].quantity,
+            console.log(indexProduct);
+            if (indexProduct !== -1) {
+                state[indexProduct] = {
+                    id,
+                    quantity: ++state[indexProduct].quantity,
                 };
             } else {
-                action.payload.quantity = 0;
-                state.cart.push(action.payload);
+                const newObjectCard = {
+                    quantity: 0,
+                    id,
+                };
+                state.push(newObjectCard);
             }
-
-            return action.payload;
         },
     },
 });

@@ -1,6 +1,5 @@
-interface Cart extends TProduct {
+interface Cart {
     quantity: number;
+    id: string;
 }
-export interface CartReducer {
-    cart: Cart[];
-}
+export type CartReducer = Cart[];
