@@ -6,12 +6,10 @@ import { Provider } from 'react-redux';
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
-        <Provider store={}>
-            <Fragment>
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </Fragment>
-        </Provider>
+        <Fragment>
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
+        </Fragment>
     );
 }
