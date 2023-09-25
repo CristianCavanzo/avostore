@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const AvocadoComponent = styled.div`
+    color: #252525;
     min-width: 230px;
     display: flex;
     flex-direction: column;

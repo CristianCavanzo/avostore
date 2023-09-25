@@ -1,6 +1,7 @@
+import { AvocadoSlice } from './avocado';
 import { CartReducer } from './cart';
 
 export interface AppStore {
     cart: CartReducer;
-    avocados: TProduct[];
+    avocados: AvocadoSlice;
 }

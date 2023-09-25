@@ -1,10 +1,14 @@
+import { AvocadoSlice } from '@models/avocado';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const initialState: TProduct[] = [];
+const initialState: AvocadoSlice = {
+    avocados: [],
+    avocado: null,
+};
 
 export const getAvocados = createAsyncThunk(
-    'avocados/fetch',
+    'avocados/getAvocados',
     async (_, { dispatch }) => {
         try {
             const { data: response } = await axios('/api/avos');
@@ -16,15 +20,28 @@ export const getAvocados = createAsyncThunk(
         }
     }
 );
+export const getAvocadoById = createAsyncThunk(
+    'avocado/getByid',
+    async (id: string, { dispatch }) => {
+        console.log(id);
+        const { data: response } = await axios(`/api/avos/${id}`);
+        if (!response.error) {
+            dispatch(setAvocado(response.data));
+        }
+    }
+);
 
 const avocadoSlice = createSlice({
     name: 'avocados',
     initialState,
     reducers: {
         setAvocados: (state, action) => {
-            state.push(...action.payload);
+            state.avocados.push(...action.payload);
+        },
+        setAvocado: (state, action) => {
+            state.avocado = action.payload;
         },
     },
 });
 export default avocadoSlice.reducer;
-export const { setAvocados } = avocadoSlice.actions;
+export const { setAvocados, setAvocado } = avocadoSlice.actions;

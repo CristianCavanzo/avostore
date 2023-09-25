@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: CartReducer = [];
 
-const store = createSlice({
+const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
@@ -12,7 +12,6 @@ const store = createSlice({
             const indexProduct = state.findIndex(
                 (product) => product.id === id
             );
-            console.log(indexProduct);
             if (indexProduct !== -1) {
                 state[indexProduct] = {
                     id,
@@ -20,7 +19,7 @@ const store = createSlice({
                 };
             } else {
                 const newObjectCard = {
-                    quantity: 0,
+                    quantity: 1,
                     id,
                 };
                 state.push(newObjectCard);
@@ -29,5 +28,5 @@ const store = createSlice({
     },
 });
 
-export default store.reducer;
-export const { addToCard } = store.actions;
+export default cartSlice.reducer;
+export const { addToCard } = cartSlice.actions;
