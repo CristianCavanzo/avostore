@@ -23,7 +23,6 @@ export const getAvocados = createAsyncThunk(
 export const getAvocadoById = createAsyncThunk(
     'avocado/getByid',
     async (id: string, { dispatch }) => {
-        console.log(id);
         const { data: response } = await axios(`/api/avos/${id}`);
         if (!response.error) {
             dispatch(setAvocado(response.data));
