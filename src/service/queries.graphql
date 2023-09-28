@@ -1,0 +1,29 @@
+query GetAllProducts {
+    products(limit: 10, offset: 0) {
+        id
+        title
+        price
+        description
+        images
+        category {
+            id
+            name
+            image
+        }
+    }
+}
+
+query GetById($id: ID!) {
+    product(id: $id) {
+        id
+        title
+        price
+        description
+        images
+        category {
+            id
+            name
+            image
+        }
+    }
+}
