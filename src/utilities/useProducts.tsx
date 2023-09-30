@@ -1,5 +1,4 @@
 import { gql, useQuery } from '@apollo/client';
-import { useGetAllProductsQuery } from '@service/graphql';
 export interface Products {
     id: number;
     title: string;
@@ -37,7 +36,6 @@ export const useProducts = () => {
     return { data, loading, error };
 };
 export const useProduct = (id: string) => {
-    
     const result = gql`
         query {
             products(id: ${id}) {

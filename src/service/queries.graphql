@@ -1,29 +1,27 @@
-query GetAllProducts {
-    products(limit: 10, offset: 0) {
-        id
-        title
-        price
+fragment AvoFields on Avocado {
+    attributes {
         description
-        images
-        category {
-            id
-            name
-            image
-        }
+        hardiness
+        shape
+        taste
+    }
+    createdAt
+    deletedAt
+    id
+    image
+    name
+    price
+    sku
+    updatedAt
+}
+query GetAllAvocados {
+    avos {
+        ...AvoFields
     }
 }
 
-query GetById($id: ID!) {
-    product(id: $id) {
-        id
-        title
-        price
-        description
-        images
-        category {
-            id
-            name
-            image
-        }
+query GetById($avoId: ID!) {
+    avo(id: $avoId) {
+        ...AvoFields
     }
 }
