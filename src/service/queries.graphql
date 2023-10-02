@@ -25,3 +25,20 @@ query GetById($avoId: ID!) {
         ...AvoFields
     }
 }
+
+input AvoCreateInput {
+    name: String!
+    price: Float!
+    sku: String!
+    image: String!
+    description: String
+    shape: String
+    hardiness: String
+    taste: String
+}
+
+mutation CreateAvo($avo: AvoCreateInput!) {
+    createAvo(data: $avo) {
+        ...AvoFields
+    }
+}

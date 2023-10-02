@@ -2,7 +2,6 @@ import { apolloClient } from '@client';
 import { Avocado as AvocadoComponent } from '@components/Cards';
 import { AvocadoContainer } from '@components/views/Home/styled-components';
 import { setAvocados } from '@redux/slices/avocadoSlice';
-import { setProducts } from '@redux/slices/productSlice';
 import { AppDispatch, RootState } from '@redux/store';
 import { Avocado, GetAllAvocadosDocument } from '@service/graphql';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
