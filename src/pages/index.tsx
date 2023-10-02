@@ -4,7 +4,7 @@ import { AvocadoContainer } from '@components/views/Home/styled-components';
 import { setAvocados } from '@redux/slices/avocadoSlice';
 import { AppDispatch, RootState } from '@redux/store';
 import { Avocado, GetAllAvocadosDocument } from '@service/graphql';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType, } from 'next';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,6 +13,7 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async () => {
     const response = await apolloClient.query({
         query: GetAllAvocadosDocument,
+        fetchPolicy: 'network-only',
     });
     if (!response.data.avos) {
         throw new Error('');

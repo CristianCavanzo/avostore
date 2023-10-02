@@ -1,11 +1,14 @@
+import { apolloClient } from '@client';
 import { montserrat } from '@components/Layout';
-import { getAvocadoById } from '@redux/slices/avocadoSlice';
-import { AppDispatch, RootState } from '@redux/store';
+import {
+    AvoFieldsFragment,
+    GetAllAvocadosIDsDocument,
+    GetByIdDocument,
+} from '@service/graphql';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+
 const AvocadoComponent = styled.div`
     display: flex;
     flex-direction: column;
@@ -45,22 +48,43 @@ const AvocadoComponent = styled.div`
             font-weight: 600;
             cursor: pointer;
         }
-        .avocado__attributes{
-            
+        .avocado__attributes {
         }
     }
 `;
-const Avocado = () => {
-    const dispatch = useDispatch<AppDispatch>();
-    const avocado = useSelector((state: RootState) => state.avocados.avocado);
-    const {
-        query: { id },
-    } = useRouter();
-    useEffect(() => {
-        dispatch(getAvocadoById(id as string));
-    }, [dispatch, id]);
-    if (!avocado) return <h1>Loading...</h1>;
 
+export const getStaticPaths = async () => {
+    const response = await apolloClient.query({
+        query: GetAllAvocadosIDsDocument,
+        fetchPolicy: 'network-only',
+    });
+    const paths = response.data.avos.map((avocado) => ({
+        params: { id: avocado.id },
+    }));
+
+    return {
+        paths,
+        fallback: 'blocking',
+    };
+};
+export const getStaticProps: GetStaticProps<{
+    product: AvoFieldsFragment;
+}> = async ({ params }) => {
+    const { data: avo } = await apolloClient.query({
+        query: GetByIdDocument,
+        variables: {
+            avoId: params.id as string,
+        },
+    });
+    return {
+        props: {
+            product: avo.avo,
+        },
+    };
+};
+const Avocado = ({
+    product: avocado,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <AvocadoComponent>
             <Image

@@ -19,6 +19,11 @@ query GetAllAvocados {
         ...AvoFields
     }
 }
+query GetAllAvocadosIDs {
+    avos {
+        id
+    }
+}
 
 query GetById($avoId: ID!) {
     avo(id: $avoId) {
